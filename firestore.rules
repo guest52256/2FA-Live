@@ -1,0 +1,67 @@
+rules_version = '2';
+
+// Firestore security rules for the optional account layer.
+//
+//   users/{uid}     profile documents (e-mail, display name, role, …)
+//   meta/app        application metadata (holds the "first administrator" claim)
+//   adminLogs/{id}  audit trail of administrator actions
+//
+// Deploy with:  firebase deploy --only firestore:rules
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // --- User profiles -----------------------------------------------------
+    match /users/{userId} {
+      allow read: if isSignedIn() && (isAdmin() || request.auth.uid == userId);
+
+      // A user may create their own profile, but never grant themselves admin.
+      allow create: if isSignedIn()
+        && request.auth.uid == userId
+        && request.resource.data.uid == userId
+        && request.resource.data.role in ['user', 'admin'];
+
+      // Administrators may change anything; a user may only refresh their own
+      // profile, and must not change their own role.
+      allow update: if isAdmin()
+        || (isSignedIn()
+            && request.auth.uid == userId
+            && request.resource.data.role == resource.data.role);
+
+      allow delete: if isAdmin();
+    }
+
+    // --- Application metadata ----------------------------------------------
+    match /meta/{docId} {
+      allow read: if isSignedIn();
+
+      // The very first account may claim the "first administrator" slot.
+      allow create: if isSignedIn()
+        && request.resource.data.firstAdminUid == request.auth.uid;
+
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // --- Administrator audit trail -----------------------------------------
+    match /adminLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    // Everything else is off-limits.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

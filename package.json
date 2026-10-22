@@ -1,0 +1,50 @@
+{
+  "name": "2fa-live-code",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Zero-knowledge, browser-based TOTP (2FA) authenticator — a faithful reproduction of https://2fa.co.com/",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit --pretty",
+    "lint": "tsc --noEmit --pretty",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "verify": "npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "firebase": "^12.19.0",
+    "jsqr": "^1.4.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^26.6.5",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "autoprefixer": "^10.6.1",
+    "jsdom": "^30.1.3",
+    "postcss": "^8.5.31",
+    "qrcode": "^1.5.4",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.7",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=22.22.2"
+  }
+}

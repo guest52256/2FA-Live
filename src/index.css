@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * The source page loads the Tailwind Play CDN, whose generated stylesheet is
+ * injected *after* the page's own <style> block. Utilities therefore win over
+ * the custom classes below: `border-b-0` beats `.glass-card`'s `border` and
+ * `bg-black/60` beats `.token-text`'s `background` shorthand (while the
+ * gradient of `.token-text` still applies, because the utility only sets
+ * `background-color`).
+ *
+ * Reproducing that cascade order exactly is what `@layer components` is for:
+ * Tailwind hoists the block into the components section, i.e. before the
+ * utilities.
+ */
+
+@layer base {
+  body {
+    background-color: #0b0f19;
+    color: #e2e8f0;
+  }
+
+  /* Fixed background element to prevent mobile scroll lag */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(112, 0, 255, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(0, 240, 255, 0.1) 0px, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utilities */
+  .glass-card {
+    background: rgba(21, 28, 44, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    /* Hardware acceleration for smoother mobile rendering */
+    transform: translateZ(0);
+  }
+
+  /* Token specific styling */
+  .token-text {
+    background: linear-gradient(to right, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+  }
+
+  /* SVG Timer Ring */
+  .timer-ring-circle {
+    transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+  /* Custom Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0f19;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a344a;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+
+  .slide-up {
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .pulse-code {
+    animation: codePulse 0.4s ease-out;
+  }
+  @keyframes codePulse {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.5;
+      filter: brightness(1.5);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+      filter: brightness(1);
+    }
+  }
+}
+
+/* Respect users who ask the OS to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  .slide-up,
+  .pulse-code {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

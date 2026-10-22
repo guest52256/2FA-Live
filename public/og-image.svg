@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="2FA Live — browser based two-factor authentication token generator">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0F19" />
+      <stop offset="100%" stop-color="#151C2C" />
+    </linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#7000FF" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="80" cy="80" r="220" fill="#7000FF" opacity="0.14" />
+  <circle cx="1140" cy="580" r="240" fill="#00F0FF" opacity="0.10" />
+
+  <g transform="translate(96 96)">
+    <rect width="72" height="72" rx="18" fill="url(#g)" />
+    <g transform="translate(12 12) scale(2)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 19c0 4.7-1.35 9.07-3.67 12.76m-4.59-2.72.07-.12A18.55 18.55 0 008 19a4 4 0 118 0c0 1.36-.09 2.69-.27 4m-1.58 9.12A29.17 29.17 0 0020.23 26m5.12 1.51c.86-3.02 1.32-6.21 1.32-9.51A10.67 10.67 0 008 6.09M4 20.24c.85-1.76 1.33-3.73 1.33-5.81 0-1.94.52-3.76 1.42-5.33" />
+    </g>
+    <text x="96" y="47" font-family="'Space Grotesk', Segoe UI, sans-serif" font-size="38" font-weight="700" fill="#ffffff">2FA Live Code</text>
+  </g>
+
+  <text x="96" y="300" font-family="'Space Grotesk', Segoe UI, sans-serif" font-size="76" font-weight="700" fill="#ffffff">Generate 2FA tokens instantly</text>
+  <text x="96" y="368" font-family="'Space Grotesk', Segoe UI, sans-serif" font-size="32" fill="#94A3B8">Free, browser-based, and 100% private.</text>
+
+  <g transform="translate(96 430)">
+    <rect width="520" height="104" rx="18" fill="#05080F" stroke="#2A344A" stroke-width="2" />
+    <text x="260" y="68" text-anchor="middle" font-family="'JetBrains Mono', Consolas, monospace" font-size="52" font-weight="700" letter-spacing="10" fill="url(#g)">283 104</text>
+  </g>
+</svg>

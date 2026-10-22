@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <!-- Site icon (original SVG equivalent of the source favicon) -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta charset="UTF-8" />
+    <!--
+      NOTE: The source site uses `maximum-scale=1.0, user-scalable=no`, which blocks
+      browser zoom. That is an accessibility anti-pattern (WCAG 1.4.4 / 1.4.10), so
+      this reproduction keeps pinch-zoom enabled. See README -> "Intentional deviations".
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0F19" />
+    <meta
+      name="description"
+      content="Generate secure 2FA (Two-Factor Authentication) codes instantly with our free, browser-based OTP & TOTP generator. No accounts, no apps—100% private and secure."
+    />
+    <meta
+      name="keywords"
+      content="2fa, totp generator, authenticator online, secure 2fa code, browser authenticator, 2fa live tool"
+    />
+    <meta name="author" content="2FA Live" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="2FA Live Code" />
+    <meta property="og:title" content="2FA Auth Code" />
+    <meta
+      property="og:description"
+      content="Generate secure 2FA (Two-Factor Authentication) codes instantly with our free, browser-based OTP & TOTP generator. No accounts, no apps—100% private and secure."
+    />
+    <meta property="og:url" content="https://2fa.co.com/" />
+    <meta property="og:image" content="./og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <title>2FA Auth Code</title>
+
+    <!-- Google Fonts: Space Grotesk & JetBrains Mono (same families as the source) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
